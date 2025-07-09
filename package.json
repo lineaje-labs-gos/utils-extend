@@ -1,6 +1,6 @@
 {
   "name": "utils-extend",
-  "version": "1.0.8",
+  "version": "1.0.8-lineaje-01",
   "description": "Extend nodejs util api, and it is light weight and simple",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/douzi8/utils-extend"
+    "url": "https://github.com/lineaje-labs-gos/utils-extend"
   },
   "keywords": [
     "util",
@@ -19,6 +19,14 @@
     "node underscore"
   ],
   "author": "douzi <liaowei08@gmail.com>",
+  "contributors": [
+    { "name": "Shruthi Nair",
+      "email": "41227409+shruthi1798@users.noreply.github.com"
+    },
+    { "name": "Abhisek Sanyal",
+      "email": "10907245+abhiseksanyal@users.noreply.github.com"
+    }
+  ],
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.10.0",
@@ -26,6 +34,6 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/douzi8/utils-extend/issues"
+    "url": "https://github.com/lineaje-labs-gos/utils-extend/issues"
   }
 }
