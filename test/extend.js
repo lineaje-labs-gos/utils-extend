@@ -51,4 +51,13 @@ describe('extend', function() {
       ]
     });
   });
+
+  it('should not pollute Object.prototype', function() {
+    var target = {};
+    var source = JSON.parse('{"__proto__": {"polluted": "yes"}}');
+
+    util.extend(target, source);
+
+    assert.strictEqual(Object.prototype.polluted, undefined);
+  });
 });

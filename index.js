@@ -28,6 +28,14 @@ function extend(target, source) {
   var value;
 
   for (var key in source) {
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      continue;
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(source, key)) {
+      continue;
+    }
+
     value = source[key];
 
     if (Array.isArray(value)) {
