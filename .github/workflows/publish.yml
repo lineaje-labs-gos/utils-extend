@@ -36,6 +36,13 @@ jobs:
       - name: Clear npm cache
         run: npm cache clean --force
 
+      - name: Configure .npmrc for JFrog
+        run: |
+            echo "registry=https://${{ secrets.JFROG_HOST_NAME }}/artifactory/api/npm/${{ secrets.NPM_GOS_ALL_ARTIFACTORY }}/" > ~/.npmrc
+            echo "//${{ secrets.JFROG_HOST_NAME }}/artifactory/api/npm/${{ secrets.NPM_GOS_ALL_ARTIFACTORY }}/:_authToken=${{ secrets.CUSTOMER_ZERO_TOKEN }}" >> ~/.npmrc
+            echo "always-auth=true" >> ~/.npmrc
+
+
       - name: Install dependencies for Node
         run: npm install 2>&1 | tee npm-install.log
 
@@ -51,7 +58,6 @@ jobs:
         run: |
           PROJECT_NAME=${GITHUB_REPOSITORY##*/}
           jf rt u "npm-test.log" "${{ secrets.NPM_STAGING_ARTIFACTORY }}/logs/build_test/${PROJECT_NAME}-${{ github.event.inputs.release_version  }}/" --url https://${{ secrets.JFROG_HOST_NAME }}/artifactory/ --access-token=${{ secrets.JFROG_PASSWORD }}
-           
 
   publish:
     needs: build_test
@@ -112,3 +118,4 @@ jobs:
         run: |
           PROJECT_NAME=${GITHUB_REPOSITORY##*/}
           jf rt sp "${{ secrets.NPM_STAGING_ARTIFACTORY }}/${PROJECT_NAME}/-/${PACKAGE_FILENAME}.asc" "fixed_cves=${{ github.event.inputs.fixed_cves }}" --url https://${{ secrets.JFROG_HOST_NAME }}/artifactory/ --access-token ${{ secrets.JFROG_PASSWORD }}
+
